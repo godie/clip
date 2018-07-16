@@ -29,7 +29,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 	}
 
 	public List<Transaction> list(String userId) {
-		String queryJQL = "Select t from Transaction where t.userId = "+ userId;
+		String queryJQL = "Select t from Transaction t where t.userId = "+ userId;
 		EntityManager em = EntityManagerFactoryUtil.getEntityManager();
 		Query query = em.createQuery(queryJQL, Transaction.class);
 		List<Transaction> transactionList = query.getResultList();
