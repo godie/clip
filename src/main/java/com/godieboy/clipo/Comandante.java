@@ -57,7 +57,7 @@ public class Comandante {
 		
 		case "sum":
 			Map<String, Double> sum = dao.sum(userIdString);
-			System.out.println(sum);
+			System.out.println("{ \"user_id\":" + userIdString + ", \"sum\": " + sum.get(userIdString) + " } ");
 			break;
 		default:
 			 transaction = dao.show(actionString, userIdString);
