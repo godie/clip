@@ -5,12 +5,17 @@
         http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="ClipDB">
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/clipdb" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/clipdb?useSSL=false" />
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="" />
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
+             <property name="initialPoolSize" value="5"/>
+  <property name="minPoolSize" value="5" />
+  <property name="maxPoolSize" value="20" />
+  <property name="maxIdleTime" value="30000" />
+            
         </properties>
     </persistence-unit>
      

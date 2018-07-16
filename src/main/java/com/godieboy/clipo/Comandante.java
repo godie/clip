@@ -2,7 +2,6 @@ package com.godieboy.clipo;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import com.godieboy.clipo.dao.TransactionDAO;
 import com.godieboy.clipo.dao.impl.TransactionDAOImpl;
@@ -25,11 +24,27 @@ public class Comandante {
 			
 		switch (actionString) {
 		case "add":
-			String json = args[3];
-			 transaction = JsonConverter.jsonToEntity(json);
-			 transaction.setUserId(userIdString);
-			 transaction = dao.add(transaction);
-			System.out.println(transaction.toString());
+			int indexArg = 2;
+			StringBuffer jsonFile = new StringBuffer();
+			jsonFile.append(args[indexArg]);
+			indexArg++;
+			while(!jsonFile.toString().contains("}")) {
+				System.out.println(jsonFile.toString());
+				jsonFile.append(args[indexArg]);
+				indexArg++;
+			}
+			try {
+				//String json = new String(Files.readAllBytes(Paths.get(jsonFile)));
+				System.out.println(jsonFile.toString());
+				 transaction = JsonConverter.jsonToEntity(jsonFile.toString());
+				 transaction.setUserId(userIdString);
+				 transaction = dao.add(transaction);
+				System.out.println(transaction.toString());
+			}catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+	
 			break;
 		case "list":
 			List<Transaction> list = dao.list(userIdString);
@@ -60,6 +75,8 @@ public class Comandante {
 			errorMessage = "No User why?";
 		}
 		System.out.print(errorMessage);
+		
+		//EntityManagerFactoryUtil.close();
 
 	}
 

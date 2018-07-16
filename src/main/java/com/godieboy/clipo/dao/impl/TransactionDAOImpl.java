@@ -17,11 +17,14 @@ public class TransactionDAOImpl implements TransactionDAO {
 
 	public Transaction add(Transaction transaction) {
 		EntityManager em = EntityManagerFactoryUtil.getEntityManager();
+		em.getTransaction().begin();
 		if(transaction.getId() == null) {
 			String id = UUID.randomUUID().toString();
 			transaction.setId(id);
 		}
 		em.persist(transaction);
+		em.getTransaction().commit();
+
 		return transaction;
 	}
 
